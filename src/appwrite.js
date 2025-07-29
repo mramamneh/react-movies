@@ -1,3 +1,4 @@
+import { trendingMoviesMock } from "./data/trendingMoviesMock.js";
 import { Client, Databases, ID, Query } from 'appwrite'
 
 const PROJECT_ID = import.meta.env.VITE_APPWRITE_PROJECT_ID;
@@ -39,14 +40,21 @@ export const updateSearchCount = async (searchTerm, movie) => {
 }
 
 export const getTrendingMovies = async () => {
- try {
-  const result = await database.listDocuments(DATABASE_ID, COLLECTION_ID, [
+  try {
+
+    /*
+      const result = await database.listDocuments(DATABASE_ID, COLLECTION_ID, [
     Query.limit(5),
     Query.orderDesc("count")
-  ])
+  ]) */
 
-  return result.documents;
- } catch (error) {
-  console.error(error);
- }
-}
+    // Mocked data simulating Appwrite or TMDB response
+    const result = trendingMoviesMock;
+
+    // ✅ THIS was missing
+    return result.documents;
+  } catch (error) {
+    console.error(error);
+    return []; // Optional: fallback if error happens
+  }
+};
