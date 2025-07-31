@@ -26,3 +26,9 @@ jobs:
 
       - name: Build app
         run: npm run build
+      # if you want to download the file from the artifact section run this task otherwise remove it 
+      - name: Upload build folder
+        uses: actions/upload-artifact@v4
+        with:
+          name: react-build
+          path: build
